@@ -1,0 +1,21 @@
+{
+  "id": "validate",
+  "cases": [
+    {
+      "stdin": "",
+      "stdout": "ok\n"
+    },
+    {
+      "stdin": "{\"name\":\"quill\",\"role\":\"dev\",\"years\":4}\n{\"name\":\"moss\",\"role\":\"scribe\",\"years\":17}\n",
+      "stdout": "ok\n"
+    },
+    {
+      "stdin": "{\"name\":\"quill\",\"role\":\"dev\",\"title\":\"x\"}\n",
+      "stdout": "bad\n"
+    },
+    {
+      "stdin": "{\"name\":\"quill\"}\n",
+      "stdout": "bad\n"
+    }
+  ]
+}

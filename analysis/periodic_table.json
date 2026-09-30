@@ -1,0 +1,1947 @@
+{
+  "elements": [
+    {
+      "atomic_number": 1,
+      "atomic_weight": {
+        "high": 1.00811,
+        "kind": "interval",
+        "low": 1.00784,
+        "published": "[1.007 84, 1.008 11]"
+      },
+      "block": "s",
+      "category": "reactive nonmetal",
+      "category_status": "conventional",
+      "group": 1,
+      "name": "hydrogen",
+      "period": 1,
+      "series": null,
+      "symbol": "H"
+    },
+    {
+      "atomic_number": 2,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "4.002 602(2)",
+        "uncertainty": 2e-06,
+        "value": 4.002602
+      },
+      "block": "s",
+      "category": "noble gas",
+      "category_status": "conventional",
+      "group": 18,
+      "name": "helium",
+      "period": 1,
+      "series": null,
+      "symbol": "He"
+    },
+    {
+      "atomic_number": 3,
+      "atomic_weight": {
+        "high": 6.997,
+        "kind": "interval",
+        "low": 6.938,
+        "published": "[6.938, 6.997]"
+      },
+      "block": "s",
+      "category": "alkali metal",
+      "category_status": "conventional",
+      "group": 1,
+      "name": "lithium",
+      "period": 2,
+      "series": null,
+      "symbol": "Li"
+    },
+    {
+      "atomic_number": 4,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "9.012 1831(5)",
+        "uncertainty": 5e-07,
+        "value": 9.0121831
+      },
+      "block": "s",
+      "category": "alkaline earth metal",
+      "category_status": "conventional",
+      "group": 2,
+      "name": "beryllium",
+      "period": 2,
+      "series": null,
+      "symbol": "Be"
+    },
+    {
+      "atomic_number": 5,
+      "atomic_weight": {
+        "high": 10.821,
+        "kind": "interval",
+        "low": 10.806,
+        "published": "[10.806, 10.821]"
+      },
+      "block": "p",
+      "category": "metalloid",
+      "category_status": "conventional",
+      "group": 13,
+      "name": "boron",
+      "period": 2,
+      "series": null,
+      "symbol": "B"
+    },
+    {
+      "atomic_number": 6,
+      "atomic_weight": {
+        "high": 12.0116,
+        "kind": "interval",
+        "low": 12.0096,
+        "published": "[12.0096, 12.0116]"
+      },
+      "block": "p",
+      "category": "reactive nonmetal",
+      "category_status": "conventional",
+      "group": 14,
+      "name": "carbon",
+      "period": 2,
+      "series": null,
+      "symbol": "C"
+    },
+    {
+      "atomic_number": 7,
+      "atomic_weight": {
+        "high": 14.00728,
+        "kind": "interval",
+        "low": 14.00643,
+        "published": "[14.006 43, 14.007 28]"
+      },
+      "block": "p",
+      "category": "reactive nonmetal",
+      "category_status": "conventional",
+      "group": 15,
+      "name": "nitrogen",
+      "period": 2,
+      "series": null,
+      "symbol": "N"
+    },
+    {
+      "atomic_number": 8,
+      "atomic_weight": {
+        "high": 15.99977,
+        "kind": "interval",
+        "low": 15.99903,
+        "published": "[15.999 03, 15.999 77]"
+      },
+      "block": "p",
+      "category": "reactive nonmetal",
+      "category_status": "conventional",
+      "group": 16,
+      "name": "oxygen",
+      "period": 2,
+      "series": null,
+      "symbol": "O"
+    },
+    {
+      "atomic_number": 9,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "18.998 403 162(5)",
+        "uncertainty": 5e-09,
+        "value": 18.998403162
+      },
+      "block": "p",
+      "category": "reactive nonmetal",
+      "category_status": "conventional",
+      "group": 17,
+      "name": "fluorine",
+      "period": 2,
+      "series": null,
+      "symbol": "F"
+    },
+    {
+      "atomic_number": 10,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "20.1797(6)",
+        "uncertainty": 0.0006000000000000001,
+        "value": 20.1797
+      },
+      "block": "p",
+      "category": "noble gas",
+      "category_status": "conventional",
+      "group": 18,
+      "name": "neon",
+      "period": 2,
+      "series": null,
+      "symbol": "Ne"
+    },
+    {
+      "atomic_number": 11,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "22.989 769 28(2)",
+        "uncertainty": 2e-08,
+        "value": 22.98976928
+      },
+      "block": "s",
+      "category": "alkali metal",
+      "category_status": "conventional",
+      "group": 1,
+      "name": "sodium",
+      "period": 3,
+      "series": null,
+      "symbol": "Na"
+    },
+    {
+      "atomic_number": 12,
+      "atomic_weight": {
+        "high": 24.307,
+        "kind": "interval",
+        "low": 24.304,
+        "published": "[24.304, 24.307]"
+      },
+      "block": "s",
+      "category": "alkaline earth metal",
+      "category_status": "conventional",
+      "group": 2,
+      "name": "magnesium",
+      "period": 3,
+      "series": null,
+      "symbol": "Mg"
+    },
+    {
+      "atomic_number": 13,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "26.981 5384(3)",
+        "uncertainty": 3e-07,
+        "value": 26.9815384
+      },
+      "block": "p",
+      "category": "post-transition metal",
+      "category_status": "conventional",
+      "group": 13,
+      "name": "aluminium",
+      "period": 3,
+      "series": null,
+      "symbol": "Al"
+    },
+    {
+      "atomic_number": 14,
+      "atomic_weight": {
+        "high": 28.086,
+        "kind": "interval",
+        "low": 28.084,
+        "published": "[28.084, 28.086]"
+      },
+      "block": "p",
+      "category": "metalloid",
+      "category_status": "conventional",
+      "group": 14,
+      "name": "silicon",
+      "period": 3,
+      "series": null,
+      "symbol": "Si"
+    },
+    {
+      "atomic_number": 15,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "30.973 761 998(5)",
+        "uncertainty": 5e-09,
+        "value": 30.973761998
+      },
+      "block": "p",
+      "category": "reactive nonmetal",
+      "category_status": "conventional",
+      "group": 15,
+      "name": "phosphorus",
+      "period": 3,
+      "series": null,
+      "symbol": "P"
+    },
+    {
+      "atomic_number": 16,
+      "atomic_weight": {
+        "high": 32.076,
+        "kind": "interval",
+        "low": 32.059,
+        "published": "[32.059, 32.076]"
+      },
+      "block": "p",
+      "category": "reactive nonmetal",
+      "category_status": "conventional",
+      "group": 16,
+      "name": "sulfur",
+      "period": 3,
+      "series": null,
+      "symbol": "S"
+    },
+    {
+      "atomic_number": 17,
+      "atomic_weight": {
+        "high": 35.457,
+        "kind": "interval",
+        "low": 35.446,
+        "published": "[35.446, 35.457]"
+      },
+      "block": "p",
+      "category": "reactive nonmetal",
+      "category_status": "conventional",
+      "group": 17,
+      "name": "chlorine",
+      "period": 3,
+      "series": null,
+      "symbol": "Cl"
+    },
+    {
+      "atomic_number": 18,
+      "atomic_weight": {
+        "high": 39.963,
+        "kind": "interval",
+        "low": 39.792,
+        "published": "[39.792, 39.963]"
+      },
+      "block": "p",
+      "category": "noble gas",
+      "category_status": "conventional",
+      "group": 18,
+      "name": "argon",
+      "period": 3,
+      "series": null,
+      "symbol": "Ar"
+    },
+    {
+      "atomic_number": 19,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "39.0983(1)",
+        "uncertainty": 0.0001,
+        "value": 39.0983
+      },
+      "block": "s",
+      "category": "alkali metal",
+      "category_status": "conventional",
+      "group": 1,
+      "name": "potassium",
+      "period": 4,
+      "series": null,
+      "symbol": "K"
+    },
+    {
+      "atomic_number": 20,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "40.078(4)",
+        "uncertainty": 0.004,
+        "value": 40.078
+      },
+      "block": "s",
+      "category": "alkaline earth metal",
+      "category_status": "conventional",
+      "group": 2,
+      "name": "calcium",
+      "period": 4,
+      "series": null,
+      "symbol": "Ca"
+    },
+    {
+      "atomic_number": 21,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "44.955 907(4)",
+        "uncertainty": 4e-06,
+        "value": 44.955907
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 3,
+      "name": "scandium",
+      "period": 4,
+      "series": null,
+      "symbol": "Sc"
+    },
+    {
+      "atomic_number": 22,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "47.867(1)",
+        "uncertainty": 0.001,
+        "value": 47.867
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 4,
+      "name": "titanium",
+      "period": 4,
+      "series": null,
+      "symbol": "Ti"
+    },
+    {
+      "atomic_number": 23,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "50.9415(1)",
+        "uncertainty": 0.0001,
+        "value": 50.9415
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 5,
+      "name": "vanadium",
+      "period": 4,
+      "series": null,
+      "symbol": "V"
+    },
+    {
+      "atomic_number": 24,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "51.9961(6)",
+        "uncertainty": 0.0006000000000000001,
+        "value": 51.9961
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 6,
+      "name": "chromium",
+      "period": 4,
+      "series": null,
+      "symbol": "Cr"
+    },
+    {
+      "atomic_number": 25,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "54.938 043(2)",
+        "uncertainty": 2e-06,
+        "value": 54.938043
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 7,
+      "name": "manganese",
+      "period": 4,
+      "series": null,
+      "symbol": "Mn"
+    },
+    {
+      "atomic_number": 26,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "55.845(2)",
+        "uncertainty": 0.002,
+        "value": 55.845
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 8,
+      "name": "iron",
+      "period": 4,
+      "series": null,
+      "symbol": "Fe"
+    },
+    {
+      "atomic_number": 27,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "58.933 194(3)",
+        "uncertainty": 3e-06,
+        "value": 58.933194
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 9,
+      "name": "cobalt",
+      "period": 4,
+      "series": null,
+      "symbol": "Co"
+    },
+    {
+      "atomic_number": 28,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "58.6934(4)",
+        "uncertainty": 0.0004,
+        "value": 58.6934
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 10,
+      "name": "nickel",
+      "period": 4,
+      "series": null,
+      "symbol": "Ni"
+    },
+    {
+      "atomic_number": 29,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "63.546(3)",
+        "uncertainty": 0.003,
+        "value": 63.546
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 11,
+      "name": "copper",
+      "period": 4,
+      "series": null,
+      "symbol": "Cu"
+    },
+    {
+      "atomic_number": 30,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "65.38(2)",
+        "uncertainty": 0.02,
+        "value": 65.38
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 12,
+      "name": "zinc",
+      "period": 4,
+      "series": null,
+      "symbol": "Zn"
+    },
+    {
+      "atomic_number": 31,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "69.723(1)",
+        "uncertainty": 0.001,
+        "value": 69.723
+      },
+      "block": "p",
+      "category": "post-transition metal",
+      "category_status": "conventional",
+      "group": 13,
+      "name": "gallium",
+      "period": 4,
+      "series": null,
+      "symbol": "Ga"
+    },
+    {
+      "atomic_number": 32,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "72.630(8)",
+        "uncertainty": 0.008,
+        "value": 72.63
+      },
+      "block": "p",
+      "category": "metalloid",
+      "category_status": "conventional",
+      "group": 14,
+      "name": "germanium",
+      "period": 4,
+      "series": null,
+      "symbol": "Ge"
+    },
+    {
+      "atomic_number": 33,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "74.921 595(6)",
+        "uncertainty": 6e-06,
+        "value": 74.921595
+      },
+      "block": "p",
+      "category": "metalloid",
+      "category_status": "conventional",
+      "group": 15,
+      "name": "arsenic",
+      "period": 4,
+      "series": null,
+      "symbol": "As"
+    },
+    {
+      "atomic_number": 34,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "78.971(8)",
+        "uncertainty": 0.008,
+        "value": 78.971
+      },
+      "block": "p",
+      "category": "reactive nonmetal",
+      "category_status": "conventional",
+      "group": 16,
+      "name": "selenium",
+      "period": 4,
+      "series": null,
+      "symbol": "Se"
+    },
+    {
+      "atomic_number": 35,
+      "atomic_weight": {
+        "high": 79.907,
+        "kind": "interval",
+        "low": 79.901,
+        "published": "[79.901, 79.907]"
+      },
+      "block": "p",
+      "category": "reactive nonmetal",
+      "category_status": "conventional",
+      "group": 17,
+      "name": "bromine",
+      "period": 4,
+      "series": null,
+      "symbol": "Br"
+    },
+    {
+      "atomic_number": 36,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "83.798(2)",
+        "uncertainty": 0.002,
+        "value": 83.798
+      },
+      "block": "p",
+      "category": "noble gas",
+      "category_status": "conventional",
+      "group": 18,
+      "name": "krypton",
+      "period": 4,
+      "series": null,
+      "symbol": "Kr"
+    },
+    {
+      "atomic_number": 37,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "85.4678(3)",
+        "uncertainty": 0.00030000000000000003,
+        "value": 85.4678
+      },
+      "block": "s",
+      "category": "alkali metal",
+      "category_status": "conventional",
+      "group": 1,
+      "name": "rubidium",
+      "period": 5,
+      "series": null,
+      "symbol": "Rb"
+    },
+    {
+      "atomic_number": 38,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "87.62(1)",
+        "uncertainty": 0.01,
+        "value": 87.62
+      },
+      "block": "s",
+      "category": "alkaline earth metal",
+      "category_status": "conventional",
+      "group": 2,
+      "name": "strontium",
+      "period": 5,
+      "series": null,
+      "symbol": "Sr"
+    },
+    {
+      "atomic_number": 39,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "88.905 838(2)",
+        "uncertainty": 2e-06,
+        "value": 88.905838
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 3,
+      "name": "yttrium",
+      "period": 5,
+      "series": null,
+      "symbol": "Y"
+    },
+    {
+      "atomic_number": 40,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "91.222(3)",
+        "uncertainty": 0.003,
+        "value": 91.222
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 4,
+      "name": "zirconium",
+      "period": 5,
+      "series": null,
+      "symbol": "Zr"
+    },
+    {
+      "atomic_number": 41,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "92.906 37(1)",
+        "uncertainty": 1e-05,
+        "value": 92.90637
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 5,
+      "name": "niobium",
+      "period": 5,
+      "series": null,
+      "symbol": "Nb"
+    },
+    {
+      "atomic_number": 42,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "95.95(1)",
+        "uncertainty": 0.01,
+        "value": 95.95
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 6,
+      "name": "molybdenum",
+      "period": 5,
+      "series": null,
+      "symbol": "Mo"
+    },
+    {
+      "atomic_number": 43,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 7,
+      "name": "technetium",
+      "period": 5,
+      "series": null,
+      "symbol": "Tc"
+    },
+    {
+      "atomic_number": 44,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "101.07(2)",
+        "uncertainty": 0.02,
+        "value": 101.07
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 8,
+      "name": "ruthenium",
+      "period": 5,
+      "series": null,
+      "symbol": "Ru"
+    },
+    {
+      "atomic_number": 45,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "102.905 49(2)",
+        "uncertainty": 2e-05,
+        "value": 102.90549
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 9,
+      "name": "rhodium",
+      "period": 5,
+      "series": null,
+      "symbol": "Rh"
+    },
+    {
+      "atomic_number": 46,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "106.42(1)",
+        "uncertainty": 0.01,
+        "value": 106.42
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 10,
+      "name": "palladium",
+      "period": 5,
+      "series": null,
+      "symbol": "Pd"
+    },
+    {
+      "atomic_number": 47,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "107.8682(2)",
+        "uncertainty": 0.0002,
+        "value": 107.8682
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 11,
+      "name": "silver",
+      "period": 5,
+      "series": null,
+      "symbol": "Ag"
+    },
+    {
+      "atomic_number": 48,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "112.414(4)",
+        "uncertainty": 0.004,
+        "value": 112.414
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 12,
+      "name": "cadmium",
+      "period": 5,
+      "series": null,
+      "symbol": "Cd"
+    },
+    {
+      "atomic_number": 49,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "114.818(1)",
+        "uncertainty": 0.001,
+        "value": 114.818
+      },
+      "block": "p",
+      "category": "post-transition metal",
+      "category_status": "conventional",
+      "group": 13,
+      "name": "indium",
+      "period": 5,
+      "series": null,
+      "symbol": "In"
+    },
+    {
+      "atomic_number": 50,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "118.710(7)",
+        "uncertainty": 0.007,
+        "value": 118.71
+      },
+      "block": "p",
+      "category": "post-transition metal",
+      "category_status": "conventional",
+      "group": 14,
+      "name": "tin",
+      "period": 5,
+      "series": null,
+      "symbol": "Sn"
+    },
+    {
+      "atomic_number": 51,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "121.760(1)",
+        "uncertainty": 0.001,
+        "value": 121.76
+      },
+      "block": "p",
+      "category": "metalloid",
+      "category_status": "conventional",
+      "group": 15,
+      "name": "antimony",
+      "period": 5,
+      "series": null,
+      "symbol": "Sb"
+    },
+    {
+      "atomic_number": 52,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "127.60(3)",
+        "uncertainty": 0.03,
+        "value": 127.6
+      },
+      "block": "p",
+      "category": "metalloid",
+      "category_status": "conventional",
+      "group": 16,
+      "name": "tellurium",
+      "period": 5,
+      "series": null,
+      "symbol": "Te"
+    },
+    {
+      "atomic_number": 53,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "126.904 47(3)",
+        "uncertainty": 3.0000000000000004e-05,
+        "value": 126.90447
+      },
+      "block": "p",
+      "category": "reactive nonmetal",
+      "category_status": "conventional",
+      "group": 17,
+      "name": "iodine",
+      "period": 5,
+      "series": null,
+      "symbol": "I"
+    },
+    {
+      "atomic_number": 54,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "131.293(6)",
+        "uncertainty": 0.006,
+        "value": 131.293
+      },
+      "block": "p",
+      "category": "noble gas",
+      "category_status": "conventional",
+      "group": 18,
+      "name": "xenon",
+      "period": 5,
+      "series": null,
+      "symbol": "Xe"
+    },
+    {
+      "atomic_number": 55,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "132.905 451 96(6)",
+        "uncertainty": 6.000000000000001e-08,
+        "value": 132.90545196
+      },
+      "block": "s",
+      "category": "alkali metal",
+      "category_status": "conventional",
+      "group": 1,
+      "name": "caesium",
+      "period": 6,
+      "series": null,
+      "symbol": "Cs"
+    },
+    {
+      "atomic_number": 56,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "137.327(7)",
+        "uncertainty": 0.007,
+        "value": 137.327
+      },
+      "block": "s",
+      "category": "alkaline earth metal",
+      "category_status": "conventional",
+      "group": 2,
+      "name": "barium",
+      "period": 6,
+      "series": null,
+      "symbol": "Ba"
+    },
+    {
+      "atomic_number": 57,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "138.905 47(7)",
+        "uncertainty": 7.000000000000001e-05,
+        "value": 138.90547
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "lanthanum",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "La"
+    },
+    {
+      "atomic_number": 58,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "140.116(1)",
+        "uncertainty": 0.001,
+        "value": 140.116
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "cerium",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "Ce"
+    },
+    {
+      "atomic_number": 59,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "140.907 66(1)",
+        "uncertainty": 1e-05,
+        "value": 140.90766
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "praseodymium",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "Pr"
+    },
+    {
+      "atomic_number": 60,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "144.242(3)",
+        "uncertainty": 0.003,
+        "value": 144.242
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "neodymium",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "Nd"
+    },
+    {
+      "atomic_number": 61,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "promethium",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "Pm"
+    },
+    {
+      "atomic_number": 62,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "150.36(2)",
+        "uncertainty": 0.02,
+        "value": 150.36
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "samarium",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "Sm"
+    },
+    {
+      "atomic_number": 63,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "151.964(1)",
+        "uncertainty": 0.001,
+        "value": 151.964
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "europium",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "Eu"
+    },
+    {
+      "atomic_number": 64,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "157.249(2)",
+        "uncertainty": 0.002,
+        "value": 157.249
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "gadolinium",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "Gd"
+    },
+    {
+      "atomic_number": 65,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "158.925 354(7)",
+        "uncertainty": 7e-06,
+        "value": 158.925354
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "terbium",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "Tb"
+    },
+    {
+      "atomic_number": 66,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "162.500(1)",
+        "uncertainty": 0.001,
+        "value": 162.5
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "dysprosium",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "Dy"
+    },
+    {
+      "atomic_number": 67,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "164.930 329(5)",
+        "uncertainty": 4.9999999999999996e-06,
+        "value": 164.930329
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "holmium",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "Ho"
+    },
+    {
+      "atomic_number": 68,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "167.259(3)",
+        "uncertainty": 0.003,
+        "value": 167.259
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "erbium",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "Er"
+    },
+    {
+      "atomic_number": 69,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "168.934 219(5)",
+        "uncertainty": 4.9999999999999996e-06,
+        "value": 168.934219
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "thulium",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "Tm"
+    },
+    {
+      "atomic_number": 70,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "173.045(10)",
+        "uncertainty": 0.01,
+        "value": 173.045
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "ytterbium",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "Yb"
+    },
+    {
+      "atomic_number": 71,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "174.966 69(5)",
+        "uncertainty": 5e-05,
+        "value": 174.96669
+      },
+      "block": "f",
+      "category": "lanthanide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "lutetium",
+      "period": 6,
+      "series": "lanthanide",
+      "symbol": "Lu"
+    },
+    {
+      "atomic_number": 72,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "178.486(6)",
+        "uncertainty": 0.006,
+        "value": 178.486
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 4,
+      "name": "hafnium",
+      "period": 6,
+      "series": null,
+      "symbol": "Hf"
+    },
+    {
+      "atomic_number": 73,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "180.947 88(2)",
+        "uncertainty": 2e-05,
+        "value": 180.94788
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 5,
+      "name": "tantalum",
+      "period": 6,
+      "series": null,
+      "symbol": "Ta"
+    },
+    {
+      "atomic_number": 74,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "183.84(1)",
+        "uncertainty": 0.01,
+        "value": 183.84
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 6,
+      "name": "tungsten",
+      "period": 6,
+      "series": null,
+      "symbol": "W"
+    },
+    {
+      "atomic_number": 75,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "186.207(1)",
+        "uncertainty": 0.001,
+        "value": 186.207
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 7,
+      "name": "rhenium",
+      "period": 6,
+      "series": null,
+      "symbol": "Re"
+    },
+    {
+      "atomic_number": 76,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "190.23(3)",
+        "uncertainty": 0.03,
+        "value": 190.23
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 8,
+      "name": "osmium",
+      "period": 6,
+      "series": null,
+      "symbol": "Os"
+    },
+    {
+      "atomic_number": 77,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "192.217(2)",
+        "uncertainty": 0.002,
+        "value": 192.217
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 9,
+      "name": "iridium",
+      "period": 6,
+      "series": null,
+      "symbol": "Ir"
+    },
+    {
+      "atomic_number": 78,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "195.084(9)",
+        "uncertainty": 0.009000000000000001,
+        "value": 195.084
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 10,
+      "name": "platinum",
+      "period": 6,
+      "series": null,
+      "symbol": "Pt"
+    },
+    {
+      "atomic_number": 79,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "196.966 570(4)",
+        "uncertainty": 4e-06,
+        "value": 196.96657
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 11,
+      "name": "gold",
+      "period": 6,
+      "series": null,
+      "symbol": "Au"
+    },
+    {
+      "atomic_number": 80,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "200.592(3)",
+        "uncertainty": 0.003,
+        "value": 200.592
+      },
+      "block": "d",
+      "category": "transition metal",
+      "category_status": "conventional",
+      "group": 12,
+      "name": "mercury",
+      "period": 6,
+      "series": null,
+      "symbol": "Hg"
+    },
+    {
+      "atomic_number": 81,
+      "atomic_weight": {
+        "high": 204.385,
+        "kind": "interval",
+        "low": 204.382,
+        "published": "[204.382, 204.385]"
+      },
+      "block": "p",
+      "category": "post-transition metal",
+      "category_status": "conventional",
+      "group": 13,
+      "name": "thallium",
+      "period": 6,
+      "series": null,
+      "symbol": "Tl"
+    },
+    {
+      "atomic_number": 82,
+      "atomic_weight": {
+        "high": 207.94,
+        "kind": "interval",
+        "low": 206.14,
+        "published": "[206.14, 207.94]"
+      },
+      "block": "p",
+      "category": "post-transition metal",
+      "category_status": "conventional",
+      "group": 14,
+      "name": "lead",
+      "period": 6,
+      "series": null,
+      "symbol": "Pb"
+    },
+    {
+      "atomic_number": 83,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "208.980 40(1)",
+        "uncertainty": 1e-05,
+        "value": 208.9804
+      },
+      "block": "p",
+      "category": "post-transition metal",
+      "category_status": "conventional",
+      "group": 15,
+      "name": "bismuth",
+      "period": 6,
+      "series": null,
+      "symbol": "Bi"
+    },
+    {
+      "atomic_number": 84,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "p",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 16,
+      "name": "polonium",
+      "period": 6,
+      "series": null,
+      "symbol": "Po"
+    },
+    {
+      "atomic_number": 85,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "p",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 17,
+      "name": "astatine",
+      "period": 6,
+      "series": null,
+      "symbol": "At"
+    },
+    {
+      "atomic_number": 86,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "p",
+      "category": "noble gas",
+      "category_status": "conventional",
+      "group": 18,
+      "name": "radon",
+      "period": 6,
+      "series": null,
+      "symbol": "Rn"
+    },
+    {
+      "atomic_number": 87,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "s",
+      "category": "alkali metal",
+      "category_status": "conventional",
+      "group": 1,
+      "name": "francium",
+      "period": 7,
+      "series": null,
+      "symbol": "Fr"
+    },
+    {
+      "atomic_number": 88,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "s",
+      "category": "alkaline earth metal",
+      "category_status": "conventional",
+      "group": 2,
+      "name": "radium",
+      "period": 7,
+      "series": null,
+      "symbol": "Ra"
+    },
+    {
+      "atomic_number": 89,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "actinium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "Ac"
+    },
+    {
+      "atomic_number": 90,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "232.0377(4)",
+        "uncertainty": 0.0004,
+        "value": 232.0377
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "thorium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "Th"
+    },
+    {
+      "atomic_number": 91,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "231.035 88(1)",
+        "uncertainty": 1e-05,
+        "value": 231.03588
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "protactinium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "Pa"
+    },
+    {
+      "atomic_number": 92,
+      "atomic_weight": {
+        "kind": "value",
+        "published": "238.028 91(3)",
+        "uncertainty": 3.0000000000000004e-05,
+        "value": 238.02891
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "uranium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "U"
+    },
+    {
+      "atomic_number": 93,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "neptunium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "Np"
+    },
+    {
+      "atomic_number": 94,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "plutonium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "Pu"
+    },
+    {
+      "atomic_number": 95,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "americium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "Am"
+    },
+    {
+      "atomic_number": 96,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "curium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "Cm"
+    },
+    {
+      "atomic_number": 97,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "berkelium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "Bk"
+    },
+    {
+      "atomic_number": 98,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "californium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "Cf"
+    },
+    {
+      "atomic_number": 99,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "einsteinium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "Es"
+    },
+    {
+      "atomic_number": 100,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "fermium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "Fm"
+    },
+    {
+      "atomic_number": 101,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "mendelevium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "Md"
+    },
+    {
+      "atomic_number": 102,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "nobelium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "No"
+    },
+    {
+      "atomic_number": 103,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "f",
+      "category": "actinide",
+      "category_status": "conventional",
+      "group": null,
+      "name": "lawrencium",
+      "period": 7,
+      "series": "actinide",
+      "symbol": "Lr"
+    },
+    {
+      "atomic_number": 104,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "d",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 4,
+      "name": "rutherfordium",
+      "period": 7,
+      "series": null,
+      "symbol": "Rf"
+    },
+    {
+      "atomic_number": 105,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "d",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 5,
+      "name": "dubnium",
+      "period": 7,
+      "series": null,
+      "symbol": "Db"
+    },
+    {
+      "atomic_number": 106,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "d",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 6,
+      "name": "seaborgium",
+      "period": 7,
+      "series": null,
+      "symbol": "Sg"
+    },
+    {
+      "atomic_number": 107,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "d",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 7,
+      "name": "bohrium",
+      "period": 7,
+      "series": null,
+      "symbol": "Bh"
+    },
+    {
+      "atomic_number": 108,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "d",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 8,
+      "name": "hassium",
+      "period": 7,
+      "series": null,
+      "symbol": "Hs"
+    },
+    {
+      "atomic_number": 109,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "d",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 9,
+      "name": "meitnerium",
+      "period": 7,
+      "series": null,
+      "symbol": "Mt"
+    },
+    {
+      "atomic_number": 110,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "d",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 10,
+      "name": "darmstadtium",
+      "period": 7,
+      "series": null,
+      "symbol": "Ds"
+    },
+    {
+      "atomic_number": 111,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "d",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 11,
+      "name": "roentgenium",
+      "period": 7,
+      "series": null,
+      "symbol": "Rg"
+    },
+    {
+      "atomic_number": 112,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "d",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 12,
+      "name": "copernicium",
+      "period": 7,
+      "series": null,
+      "symbol": "Cn"
+    },
+    {
+      "atomic_number": 113,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "p",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 13,
+      "name": "nihonium",
+      "period": 7,
+      "series": null,
+      "symbol": "Nh"
+    },
+    {
+      "atomic_number": 114,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "p",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 14,
+      "name": "flerovium",
+      "period": 7,
+      "series": null,
+      "symbol": "Fl"
+    },
+    {
+      "atomic_number": 115,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "p",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 15,
+      "name": "moscovium",
+      "period": 7,
+      "series": null,
+      "symbol": "Mc"
+    },
+    {
+      "atomic_number": 116,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "p",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 16,
+      "name": "livermorium",
+      "period": 7,
+      "series": null,
+      "symbol": "Lv"
+    },
+    {
+      "atomic_number": 117,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "p",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 17,
+      "name": "tennessine",
+      "period": 7,
+      "series": null,
+      "symbol": "Ts"
+    },
+    {
+      "atomic_number": 118,
+      "atomic_weight": {
+        "kind": "none",
+        "published": "\u2014"
+      },
+      "block": "p",
+      "category": null,
+      "category_status": "not_assigned",
+      "group": 18,
+      "name": "oganesson",
+      "period": 7,
+      "series": null,
+      "symbol": "Og"
+    }
+  ],
+  "source": {
+    "atomic_weights": "CIAAW Standard Atomic Weights 2024 table, https://www.ciaaw.org/atomic-weights.htm, incorporating IUPAC Pure Appl. Chem. 2022 atomic weights and the 2024 revisions of gadolinium, lutetium, and zirconium",
+    "categories": "Conventional class for elements with an established class. Null where this dataset does not assign one (Po, At, Z>=104).",
+    "layout": "IUPAC 18-group periodic table. Lanthanoids Z=57-71 and actinoids Z=89-103 are series with group null. Helium is group 18 and block s."
+  }
+}

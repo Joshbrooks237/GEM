@@ -1,0 +1,4 @@
+{
+  "id": "serialize",
+  "visible": "Read one JSON object per line. Write one JSON array of those objects, in the same order, with no spaces, followed by a newline. If there are no objects, write [] and a newline.\n\nExample input:\n{\"name\":\"Ada\",\"role\":\"dev\",\"years\":3}\nExample output:\n[{\"name\":\"Ada\",\"role\":\"dev\",\"years\":3}]\n"
+}

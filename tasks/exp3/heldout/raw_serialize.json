@@ -1,0 +1,22 @@
+{
+  "id": "raw_serialize",
+  "visible": "Read records from stdin. Each line is one record. Split the line on spaces into key=value tokens, using the first = in a token. Ignore blank lines and lines whose first character is #. The keys are name, role, and years. Ignore any other key. If a key is repeated on a line, keep the last value. If years is present it must be decimal digits for a non-negative integer, with no leading zero unless the value is 0. Otherwise drop that record.\n\nWrite one JSON array of the remaining records, in order, with no spaces, followed by a newline. If none remain, write [] and a newline.\n\nExample input:\nname=Ada role=dev years=3\nExample output:\n[{\"name\":\"Ada\",\"role\":\"dev\",\"years\":3}]\n",
+  "cases": [
+    {
+      "stdin": "",
+      "stdout": "[]\n"
+    },
+    {
+      "stdin": "# note\n\nname=quill role=dev years=4\nname=moss role=scribe years=17 extra=1\n",
+      "stdout": "[{\"name\":\"quill\",\"role\":\"dev\",\"years\":4},{\"name\":\"moss\",\"role\":\"scribe\",\"years\":17}]\n"
+    },
+    {
+      "stdin": "name=bramble role=dev years=0\nname=quill role=dev years=01\nname=moss role=ops years=5\n",
+      "stdout": "[{\"name\":\"bramble\",\"role\":\"dev\",\"years\":0},{\"name\":\"moss\",\"role\":\"ops\",\"years\":5}]\n"
+    },
+    {
+      "stdin": "name=quill role=dev years=4 role=ops\n",
+      "stdout": "[{\"name\":\"quill\",\"role\":\"ops\",\"years\":4}]\n"
+    }
+  ]
+}

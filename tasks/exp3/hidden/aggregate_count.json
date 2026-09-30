@@ -1,0 +1,17 @@
+{
+  "id": "aggregate_count",
+  "cases": [
+    {
+      "stdin": "",
+      "stdout": "count=0\n"
+    },
+    {
+      "stdin": "{\"name\":\"quill\",\"role\":\"dev\",\"years\":4}\n{\"name\":\"moss\",\"role\":\"scribe\",\"years\":17}\n",
+      "stdout": "count=2\n"
+    },
+    {
+      "stdin": "{\"name\":\"bramble\",\"role\":\"dev\"}\n{\"name\":\"moss\",\"role\":\"ops\",\"years\":5}\n{\"name\":\"quill\",\"role\":\"dev\",\"years\":0}\n",
+      "stdout": "count=3\n"
+    }
+  ]
+}

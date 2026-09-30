@@ -1,0 +1,4 @@
+{
+  "id": "transform_band",
+  "visible": "Read one JSON object per line. Add a string field band. If years is less than five, band is junior. Otherwise band is senior. If years is missing, band is unknown. Present keys stay in the order name, role, years, band. No spaces. End each object with a newline. If there are no objects, write nothing.\n\nExample input:\n{\"name\":\"Ada\",\"role\":\"dev\",\"years\":3}\n{\"name\":\"Bea\",\"role\":\"ops\",\"years\":10}\nExample output:\n{\"name\":\"Ada\",\"role\":\"dev\",\"years\":3,\"band\":\"junior\"}\n{\"name\":\"Bea\",\"role\":\"ops\",\"years\":10,\"band\":\"senior\"}\n"
+}

@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS episodes (
     fitness_at_birth REAL,
     survived INTEGER NOT NULL DEFAULT 0,
     gamed INTEGER NOT NULL DEFAULT 0,
+    attributable INTEGER NOT NULL DEFAULT 0,
     quality_json TEXT,
     FOREIGN KEY (run_id) REFERENCES runs(run_id)
 );
@@ -185,6 +186,37 @@ CREATE TABLE IF NOT EXISTS tool_calls (
     FOREIGN KEY (episode_id) REFERENCES episodes(id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS observations (
+    id INTEGER PRIMARY KEY,
+    run_id TEXT NOT NULL,
+    generation INTEGER NOT NULL,
+    episode_id INTEGER NOT NULL,
+    role TEXT NOT NULL,
+    path TEXT,
+    evidence TEXT,
+    blob_sha TEXT,
+    producer_episode INTEGER,
+    producer_commit TEXT,
+    counts_as_reuse INTEGER NOT NULL DEFAULT 0,
+    FOREIGN KEY (episode_id) REFERENCES episodes(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS episode_diffs (
+    episode_id INTEGER PRIMARY KEY,
+    run_id TEXT NOT NULL,
+    start_commit TEXT NOT NULL,
+    end_commit TEXT,
+    parent_commit TEXT,
+    files_changed INTEGER NOT NULL,
+    lines_added INTEGER NOT NULL,
+    lines_deleted INTEGER NOT NULL,
+    attributable INTEGER NOT NULL,
+    inherited_executable INTEGER NOT NULL,
+    diff_json TEXT NOT NULL,
+    FOREIGN KEY (episode_id) REFERENCES episodes(id) ON DELETE CASCADE
+);
+
 CREATE INDEX IF NOT EXISTS idx_episodes_run_gen ON episodes(run_id, generation);
+CREATE INDEX IF NOT EXISTS idx_observations_episode ON observations(episode_id, role);
 CREATE INDEX IF NOT EXISTS idx_reuse_producer ON reuse_events(producer_episode);
 CREATE INDEX IF NOT EXISTS idx_artifacts_path ON artifacts(run_id, path);

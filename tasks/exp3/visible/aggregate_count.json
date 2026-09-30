@@ -1,0 +1,4 @@
+{
+  "id": "aggregate_count",
+  "visible": "Read one JSON object per line. Write count=<n> and a newline, where n is how many objects there were. If there are none, write count=0 and a newline.\n\nExample input:\n{\"name\":\"Ada\",\"role\":\"dev\",\"years\":3}\nExample output:\ncount=1\n"
+}

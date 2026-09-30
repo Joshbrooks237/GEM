@@ -12,7 +12,7 @@ def refresh_reuse_fitness(ledger, run_id: str, cfg: FitnessConfig) -> None:
     episodes = ledger.rows(
         """
         SELECT id, correctness, resource_score, explainability_score,
-               explainability_sampled, gamed
+               explainability_sampled, gamed, attributable
         FROM episodes
         WHERE run_id = ?
         """,
@@ -40,8 +40,9 @@ def refresh_reuse_fitness(ledger, run_id: str, cfg: FitnessConfig) -> None:
             episode["explainability_score"],
             cfg,
         )
+        correctness = episode["correctness"] if episode["attributable"] else 0.0
         fitness = combine(
-            episode["correctness"],
+            correctness,
             episode["resource_score"],
             reuse,
             explainability,

@@ -1,0 +1,21 @@
+{
+  "id": "raw_transform_band",
+  "cases": [
+    {
+      "stdin": "",
+      "stdout": ""
+    },
+    {
+      "stdin": "# note\n\nname=quill role=dev years=4\nname=moss role=scribe years=17 extra=1\n",
+      "stdout": "{\"name\":\"quill\",\"role\":\"dev\",\"years\":4,\"band\":\"junior\"}\n{\"name\":\"moss\",\"role\":\"scribe\",\"years\":17,\"band\":\"senior\"}\n"
+    },
+    {
+      "stdin": "name=bramble role=dev years=0\nname=quill role=dev years=01\nname=moss role=ops years=5\n",
+      "stdout": "{\"name\":\"bramble\",\"role\":\"dev\",\"years\":0,\"band\":\"junior\"}\n{\"name\":\"moss\",\"role\":\"ops\",\"years\":5,\"band\":\"senior\"}\n"
+    },
+    {
+      "stdin": "name=quill role=dev years=4 role=ops\n",
+      "stdout": "{\"name\":\"quill\",\"role\":\"ops\",\"years\":4,\"band\":\"junior\"}\n"
+    }
+  ]
+}

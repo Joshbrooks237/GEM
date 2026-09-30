@@ -1,0 +1,4 @@
+{
+  "id": "aggregate_years",
+  "visible": "Read one JSON object per line. Write years=<sum> and a newline. Add each object's years. A missing years adds nothing. If there are no objects, the sum is 0.\n\nExample input:\n{\"name\":\"Ada\",\"role\":\"dev\",\"years\":3}\n{\"name\":\"Bea\",\"role\":\"ops\",\"years\":10}\nExample output:\nyears=13\n"
+}

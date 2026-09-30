@@ -1,0 +1,4 @@
+{
+  "id": "validate",
+  "visible": "Read one JSON object per line. Write ok and a newline if every line is an object, name and role are strings, years if present is an integer that is not negative, band if present is a string, and there are no other keys. Otherwise write bad and a newline. Empty input is ok.\n\nExample input:\n{\"name\":\"Ada\",\"role\":\"dev\",\"years\":3}\nExample output:\nok\n"
+}

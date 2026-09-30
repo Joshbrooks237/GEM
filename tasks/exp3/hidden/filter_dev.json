@@ -1,0 +1,17 @@
+{
+  "id": "filter_dev",
+  "cases": [
+    {
+      "stdin": "",
+      "stdout": ""
+    },
+    {
+      "stdin": "{\"name\":\"quill\",\"role\":\"dev\",\"years\":4}\n{\"name\":\"moss\",\"role\":\"scribe\",\"years\":17}\n",
+      "stdout": "{\"name\":\"quill\",\"role\":\"dev\",\"years\":4}\n"
+    },
+    {
+      "stdin": "{\"name\":\"bramble\",\"role\":\"dev\"}\n{\"name\":\"moss\",\"role\":\"ops\",\"years\":5}\n{\"name\":\"quill\",\"role\":\"dev\",\"years\":0}\n",
+      "stdout": "{\"name\":\"bramble\",\"role\":\"dev\"}\n{\"name\":\"quill\",\"role\":\"dev\",\"years\":0}\n"
+    }
+  ]
+}

@@ -15,6 +15,16 @@ def _cases(data: dict) -> tuple[Case, ...]:
     return tuple(Case(item["stdin"], item["stdout"]) for item in data["cases"])
 
 
+def load_ecology(name: str = "exp2") -> tuple[tuple[Task, ...], tuple[Task, ...]]:
+    """exp2 is the original pool. exp3 is the compositional pool and is opt-in."""
+    base = Path(__file__).resolve().parent
+    if name == "exp2":
+        return load_pool(base)
+    if name == "exp3":
+        return load_pool(base / "exp3")
+    raise ValueError(f"unknown ecology: {name}")
+
+
 def load_pool(root: Path | None = None) -> tuple[tuple[Task, ...], tuple[Task, ...]]:
     root = root or Path(__file__).resolve().parent
     visible = {path.stem: _read(path) for path in sorted((root / "visible").glob("*.json"))}

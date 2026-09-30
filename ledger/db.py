@@ -173,6 +173,7 @@ class Ledger:
                 fitness_at_birth = ?,
                 survived = ?,
                 gamed = ?,
+                attributable = ?,
                 quality_json = ?
             WHERE id = ?
             """,
@@ -193,6 +194,7 @@ class Ledger:
                 fields["fitness_at_birth"],
                 fields["survived"],
                 fields["gamed"],
+                fields["attributable"],
                 fields["quality_json"],
                 episode_id,
             ),
@@ -284,6 +286,52 @@ class Ledger:
                 fields.get("task_id"),
                 int(fields.get("archived", 0)),
                 int(fields.get("pruned", 0)),
+            ),
+        )
+
+    def insert_observation(self, **fields) -> None:
+        self.conn.execute(
+            """
+            INSERT INTO observations (
+                run_id, generation, episode_id, role, path, evidence, blob_sha,
+                producer_episode, producer_commit, counts_as_reuse
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                fields["run_id"],
+                fields["generation"],
+                fields["episode_id"],
+                fields["role"],
+                fields.get("path"),
+                fields.get("evidence"),
+                fields.get("blob_sha"),
+                fields.get("producer_episode"),
+                fields.get("producer_commit"),
+                int(fields.get("counts_as_reuse", 0)),
+            ),
+        )
+
+    def insert_episode_diff(self, **fields) -> None:
+        self.conn.execute(
+            """
+            INSERT INTO episode_diffs (
+                episode_id, run_id, start_commit, end_commit, parent_commit,
+                files_changed, lines_added, lines_deleted, attributable,
+                inherited_executable, diff_json
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                fields["episode_id"],
+                fields["run_id"],
+                fields["start_commit"],
+                fields.get("end_commit"),
+                fields.get("parent_commit"),
+                fields["files_changed"],
+                fields["lines_added"],
+                fields["lines_deleted"],
+                int(fields["attributable"]),
+                int(fields["inherited_executable"]),
+                fields["diff_json"],
             ),
         )
 
@@ -466,6 +514,14 @@ class Ledger:
             )
             self.conn.execute(
                 f"DELETE FROM antigaming WHERE episode_id IN ({marks})",
+                ep_ids,
+            )
+            self.conn.execute(
+                f"DELETE FROM observations WHERE episode_id IN ({marks})",
+                ep_ids,
+            )
+            self.conn.execute(
+                f"DELETE FROM episode_diffs WHERE episode_id IN ({marks})",
                 ep_ids,
             )
             self.conn.execute(

@@ -1,0 +1,4 @@
+{
+  "id": "filter_dev",
+  "visible": "Read one JSON object per line. Keep objects whose role is dev, unchanged, one per line, each ending with a newline. If none match, write nothing.\n\nExample input:\n{\"name\":\"Ada\",\"role\":\"dev\",\"years\":3}\n{\"name\":\"Bea\",\"role\":\"ops\",\"years\":10}\nExample output:\n{\"name\":\"Ada\",\"role\":\"dev\",\"years\":3}\n"
+}

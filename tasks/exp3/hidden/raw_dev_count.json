@@ -1,0 +1,21 @@
+{
+  "id": "raw_dev_count",
+  "cases": [
+    {
+      "stdin": "",
+      "stdout": "count=0\n"
+    },
+    {
+      "stdin": "# note\n\nname=quill role=dev years=4\nname=moss role=scribe years=17 extra=1\n",
+      "stdout": "count=1\n"
+    },
+    {
+      "stdin": "name=bramble role=dev years=0\nname=quill role=dev years=01\nname=moss role=ops years=5\n",
+      "stdout": "count=1\n"
+    },
+    {
+      "stdin": "name=quill role=dev years=4 role=ops\n",
+      "stdout": "count=0\n"
+    }
+  ]
+}

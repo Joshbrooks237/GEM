@@ -10,10 +10,9 @@ EXEC_RE = re.compile(r"(?:python3?|bash|sh)\s+([^\s;&|]+)")
 
 
 def dependencies(repo: Repo, parent_sha: str, commands: list[str]) -> list[tuple[str, str, str]]:
-    """Existing paths this episode imported or invoked.
+    """Imports of files that already existed. Agent commands are classified elsewhere.
 
-    A new file that merely sits beside an older one is not reuse. Copying a
-    line without importing or running the older file is not reuse either.
+    The harness ENTRY line is not an import and is not reuse.
     """
     found: list[tuple[str, str, str]] = []
     seen: set[str] = set()
@@ -36,14 +35,23 @@ def dependencies(repo: Repo, parent_sha: str, commands: list[str]) -> list[tuple
             module = match.group(1)
             add(module.replace(".", "/") + ".py", "import", line.strip())
 
-    for command in commands:
-        for match in EXEC_RE.findall(command):
-            add(match, "invocation", command.strip()[:240])
-    entry = repo.file_at(head, "ENTRY") or ""
+    del commands
+    return found
+
+
+def evaluator_targets(entry: str) -> list[str]:
+    """Files the harness would run from ENTRY. This is not agent reuse."""
+    found: list[str] = []
     for line in entry.splitlines():
+        line = line.strip()
+        if not line:
+            continue
         for match in EXEC_RE.findall(line):
-            add(match, "invocation", line.strip())
+            if match not in found and match != "ENTRY":
+                found.append(match)
         if not EXEC_RE.search(line):
             for match in PATH_RE.findall(line):
-                add(match, "invocation", line.strip())
+                if match not in found:
+                    found.append(match)
+        break
     return found

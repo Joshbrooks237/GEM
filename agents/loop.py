@@ -16,18 +16,27 @@ from agents.prompts import SYSTEM_PROMPT, tool_message, user_message
 from agents.provider import make_provider, parse_action
 from env.limits import Limits, clip
 from env.runner import make_sandbox
-from lattice.artifacts import dependencies
+from lattice.artifacts import evaluator_targets
+from lattice.observe import (
+    classify_command,
+    diff_records,
+    import_dependencies,
+    snapshot_tree,
+    touched_paths,
+)
 from lattice.git import Repo, git_date
 from lattice.lineage import refresh_reuse_fitness, source_episode
 from ledger.db import Ledger
 from selection.antigaming import audit
+from selection.attribution import counterfactual_passes
+from selection.keepset import candidate_attributable
 from selection.archive import archive_paths, load_archive_texts
 from selection.evaluator import evaluate, quality_notes
 from selection.explainability import explain, is_sampled, sample_key
 from selection.fitness import FitnessConfig, consumption, median, resource_efficiency
 from selection.novelty import novelty_of
 from shocks.rename_tool import make_shock
-from tasks.pool import load_pool, task_id_for, training_schedule
+from tasks.pool import load_ecology, task_id_for, training_schedule
 
 
 @dataclass
@@ -42,6 +51,7 @@ class ExperimentConfig:
     shock: str = "rename_tool"
     shock_fallback_path: str = "fallback-artifact"
     task_ids: tuple[str, ...] | None = None
+    ecology: str = "exp2"
     limits: Limits = field(default_factory=Limits)
     fitness: FitnessConfig = field(default_factory=FitnessConfig)
 
@@ -50,6 +60,8 @@ class ExperimentConfig:
             raise ValueError("generations and n_agents must be >= 1")
         if self.shock_generation < 0 or self.heldout_every < 1:
             raise ValueError("shock_generation must be >= 0 and heldout_every must be >= 1")
+        if self.ecology not in {"exp2", "exp3"}:
+            raise ValueError(f"unknown ecology: {self.ecology}")
         if isinstance(self.task_ids, list):
             self.task_ids = tuple(self.task_ids)
         if not isinstance(self.limits, Limits):
@@ -219,7 +231,7 @@ def _recover(ledger: Ledger, repo: Repo, folder: Path, run_id: str, config: Expe
 
 
 def _advance(config, ledger, repo, folder, run_id, start_gen, provider, archive_texts) -> None:
-    training, heldout = load_pool()
+    training, heldout = load_ecology(config.ecology)
     if config.task_ids:
         wanted = set(config.task_ids)
         training = tuple(task for task in training if task.id in wanted)
@@ -338,6 +350,116 @@ def _apply_shock(shock, repo, ledger, config, run_id, generation) -> None:
         print(f"shock {plan['shock_id']} not applied ({plan['reason']})", flush=True)
 
 
+def _record_observations(
+    ledger,
+    repo,
+    run_id,
+    generation,
+    episode_id,
+    agent_id,
+    task_id,
+    parent,
+    commands,
+    touched,
+) -> None:
+    """Availability, inspection, invocation, modification, dependency, and checker execution.
+
+    Only an agent import or an agent invocation of a file that already existed
+    counts toward reuse. The harness running ENTRY does not.
+    """
+    for path in repo.tracked_at(parent):
+        ledger.insert_observation(
+            run_id=run_id,
+            generation=generation,
+            episode_id=episode_id,
+            role="availability",
+            path=path,
+            evidence="present at episode start",
+            blob_sha=repo._git("rev-parse", f"{parent}:{path}", check=False).stdout.strip(),
+            counts_as_reuse=0,
+        )
+    for command in commands:
+        for role, path, evidence in classify_command(command):
+            if role == "invocation":
+                if not path or not repo.exists_at(parent, path):
+                    continue
+                source = source_episode(ledger, repo, run_id, parent, path, episode_id)
+                if source is None:
+                    continue
+                ledger.insert_reuse(
+                    run_id=run_id,
+                    generation=generation,
+                    consumer_agent=agent_id,
+                    consumer_episode=episode_id,
+                    consumer_task=task_id,
+                    producer_episode=source["episode_id"],
+                    producer_commit=source["commit_sha"],
+                    producer_path=path,
+                    evidence=evidence,
+                    kind="invocation",
+                )
+                ledger.insert_observation(
+                    run_id=run_id,
+                    generation=generation,
+                    episode_id=episode_id,
+                    role="invocation",
+                    path=path,
+                    evidence=evidence,
+                    producer_episode=source["episode_id"],
+                    producer_commit=source["commit_sha"],
+                    counts_as_reuse=1,
+                )
+                continue
+            ledger.insert_observation(
+                run_id=run_id,
+                generation=generation,
+                episode_id=episode_id,
+                role=role,
+                path=path,
+                evidence=evidence,
+                counts_as_reuse=0,
+            )
+    for path, evidence in import_dependencies(repo, parent, sorted(touched)):
+        source = source_episode(ledger, repo, run_id, parent, path, episode_id)
+        if source is None:
+            continue
+        ledger.insert_reuse(
+            run_id=run_id,
+            generation=generation,
+            consumer_agent=agent_id,
+            consumer_episode=episode_id,
+            consumer_task=task_id,
+            producer_episode=source["episode_id"],
+            producer_commit=source["commit_sha"],
+            producer_path=path,
+            evidence=evidence,
+            kind="dependency",
+        )
+        ledger.insert_observation(
+            run_id=run_id,
+            generation=generation,
+            episode_id=episode_id,
+            role="dependency",
+            path=path,
+            evidence=evidence,
+            producer_episode=source["episode_id"],
+            producer_commit=source["commit_sha"],
+            counts_as_reuse=1,
+        )
+    entry = repo.file_at(repo.head(), "ENTRY") or ""
+    first = next((line.strip() for line in entry.splitlines() if line.strip()), "")
+    for path in evaluator_targets(entry) or ([""] if first else []):
+        ledger.insert_observation(
+            run_id=run_id,
+            generation=generation,
+            episode_id=episode_id,
+            role="evaluator_execution",
+            path=path,
+            evidence=first,
+            counts_as_reuse=0,
+        )
+
+
 def run_episode(
     config,
     ledger,
@@ -374,6 +496,8 @@ def run_episode(
     limits = config.limits
     try:
         sandbox.start(repo.path, agent_id, date)
+        before_tree = snapshot_tree(repo.path)
+        parent_entry = repo.file_at(parent, "ENTRY") or ""
         messages = [
             {"role": "system", "content": SYSTEM_PROMPT},
             {
@@ -448,13 +572,15 @@ def run_episode(
         notes = quality_notes(repo, parent, head, evaluation.detail)
         if provider_error:
             notes["provider_error"] = provider_error[:500]
-        deps = dependencies(repo, parent, commands)
-        notes["deps"] = [
-            {"path": path, "kind": kind, "evidence": evidence}
-            for path, kind, evidence in deps
-        ]
     finally:
         sandbox.stop()
+
+    after_tree = snapshot_tree(repo.path)
+    touched = touched_paths(before_tree, after_tree)
+    for command in commands:
+        for role, path, _evidence in classify_command(command):
+            if role == "modification" and path:
+                touched.add(path)
 
     wall = time.perf_counter() - started
     head = repo.head()
@@ -468,7 +594,27 @@ def run_episode(
     gamed = hit is not None
     if hit:
         notes["gaming"] = hit
-    survived = evaluation.correctness >= 1.0 and not gamed
+    attributable = False
+    inherited = False
+    if not gamed and phase == "train" and evaluation.correctness >= 1.0:
+        if config.ecology == "exp3":
+            attributable, closure = candidate_attributable(
+                repo, parent, parent_entry, touched, commands, task, limits, sandbox_factory
+            )
+            notes["stale_entry"] = closure.stale_entry
+            notes["keep"] = sorted(closure.keep)
+            notes["routed_existing"] = list(closure.routed_existing)
+        else:
+            attributable = counterfactual_passes(
+                repo, parent_entry, touched, task, limits, sandbox_factory
+            )
+        inherited = not attributable
+    elif not gamed and phase != "train":
+        attributable = evaluation.correctness >= 1.0
+    notes["touched"] = sorted(touched)
+    notes["attributable"] = attributable
+    notes["inherited_executable"] = inherited
+    survived = evaluation.correctness >= 1.0 and attributable and not gamed
     new_commits = repo.commits_since(parent)
     commit_sha = new_commits[-1]["sha"] if new_commits else None
     ledger.finish_episode(
@@ -488,6 +634,7 @@ def run_episode(
         fitness_at_birth=None,
         survived=int(survived),
         gamed=int(gamed),
+        attributable=int(attributable),
         quality_json=json.dumps(notes),
     )
     if hit:
@@ -561,28 +708,38 @@ def run_episode(
                 fitness=None,
                 message=meta["message"],
             )
-    for path, kind, evidence in deps:
-        source = source_episode(ledger, repo, run_id, parent, path, episode_id)
-        if source is None:
-            continue
-        ledger.insert_reuse(
-            run_id=run_id,
-            generation=generation,
-            consumer_agent=agent_id,
-            consumer_episode=episode_id,
-            consumer_task=task.id,
-            producer_episode=source["episode_id"],
-            producer_commit=source["commit_sha"],
-            producer_path=path,
-            evidence=evidence,
-            kind=kind,
-        )
+    _record_observations(
+        ledger,
+        repo,
+        run_id,
+        generation,
+        episode_id,
+        agent_id,
+        task.id,
+        parent,
+        commands,
+        touched,
+    )
+    added, deleted, files = diff_records(repo, parent, touched)
+    ledger.insert_episode_diff(
+        episode_id=episode_id,
+        run_id=run_id,
+        start_commit=parent,
+        end_commit=commit_sha or head,
+        parent_commit=parent,
+        files_changed=len(files),
+        lines_added=added,
+        lines_deleted=deleted,
+        attributable=int(attributable),
+        inherited_executable=int(inherited),
+        diff_json=json.dumps(files),
+    )
     ledger.commit()
     refresh_reuse_fitness(ledger, run_id, config.fitness)
     print(
         f"gen {generation} {phase} {agent_id} {task.id} "
         f"pass {evaluation.passed}/{evaluation.total} "
-        f"gamed {int(gamed)} survive {int(survived)}",
+        f"gamed {int(gamed)} attributable {int(attributable)} survive {int(survived)}",
         flush=True,
     )
     return episode_id
@@ -598,7 +755,11 @@ def _score_generation(config, ledger, repo, provider, sandbox_factory, run_id, g
         (run_id, generation, phase),
     )
     if phase == "train":
-        successes = [row for row in rows if row["correctness"] >= 1 and not row["gamed"]]
+        successes = [
+            row
+            for row in rows
+            if row["correctness"] >= 1 and row["attributable"] and not row["gamed"]
+        ]
         med = median([float(row["consumption"] or 0.0) for row in successes])
         _sample_explanations(config, ledger, repo, provider, run_id, generation)
     else:
@@ -610,7 +771,11 @@ def _score_generation(config, ledger, repo, provider, sandbox_factory, run_id, g
             (run_id, generation),
         )
         med = float(stored[0]["median_consumption"]) if stored else 0.0
-        successes = [row for row in rows if row["correctness"] >= 1 and not row["gamed"]]
+        successes = [
+            row
+            for row in rows
+            if row["correctness"] >= 1 and row["attributable"] and not row["gamed"]
+        ]
     ledger.insert_generation_stat(
         run_id=run_id,
         generation=generation,

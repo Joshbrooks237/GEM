@@ -35,6 +35,7 @@ def main(argv: list[str] | None = None) -> int:
     run.add_argument("--provider", choices=("scripted", "openai"), default="scripted")
     run.add_argument("--runner", choices=("local", "docker"), default=None)
     run.add_argument("--shock-generation", type=int, default=25)
+    run.add_argument("--ecology", choices=("exp2", "exp3"), default="exp2")
     run.add_argument("--heldout-every", type=int, default=10)
     run.add_argument("--base-pass", type=float, default=None)
     run.add_argument("--resource-weight", type=float, default=None)
@@ -78,6 +79,7 @@ def main(argv: list[str] | None = None) -> int:
                 runner=runner,
                 shock_generation=args.shock_generation,
                 heldout_every=args.heldout_every,
+                ecology=args.ecology,
                 fitness=FitnessConfig(**overrides) if overrides else FitnessConfig(),
             )
             run_id = run_experiment(config, args.run_dir)

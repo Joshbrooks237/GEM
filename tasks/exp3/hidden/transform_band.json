@@ -1,0 +1,13 @@
+{
+  "id": "transform_band",
+  "cases": [
+    {
+      "stdin": "",
+      "stdout": ""
+    },
+    {
+      "stdin": "{\"name\":\"bramble\",\"role\":\"dev\"}\n{\"name\":\"moss\",\"role\":\"ops\",\"years\":5}\n{\"name\":\"quill\",\"role\":\"dev\",\"years\":0}\n",
+      "stdout": "{\"name\":\"bramble\",\"role\":\"dev\",\"band\":\"unknown\"}\n{\"name\":\"moss\",\"role\":\"ops\",\"years\":5,\"band\":\"senior\"}\n{\"name\":\"quill\",\"role\":\"dev\",\"years\":0,\"band\":\"junior\"}\n"
+    }
+  ]
+}
