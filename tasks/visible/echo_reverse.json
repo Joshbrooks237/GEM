@@ -1,0 +1,4 @@
+{
+  "id": "echo_reverse",
+  "visible": "Read one line from stdin. Write those characters in reverse order, followed by a newline.\n\nExample input:\nabc\nExample output:\ncba\n"
+}

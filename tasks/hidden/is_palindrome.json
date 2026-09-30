@@ -1,0 +1,7 @@
+{
+  "id": "is_palindrome",
+  "cases": [
+    {"stdin": "ab\n", "stdout": "no\n"},
+    {"stdin": "a\n", "stdout": "yes\n"}
+  ]
+}

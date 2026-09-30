@@ -1,0 +1,7 @@
+{
+  "id": "echo_reverse",
+  "cases": [
+    {"stdin": "xylophone\n", "stdout": "enohpolyx\n"},
+    {"stdin": "zz\n", "stdout": "zz\n"}
+  ]
+}

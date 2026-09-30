@@ -1,0 +1,9 @@
+{
+  "id": "count_lines",
+  "visible": "Read text from stdin. Write how many lines it contains, followed by a newline. A final newline does not create an extra empty line.\n\nExample input:\na\nb\nExample output:\n2\n",
+  "cases": [
+    {"stdin": "a\nb\n", "stdout": "2\n"},
+    {"stdin": "a\n\nb\n", "stdout": "3\n"},
+    {"stdin": "", "stdout": "0\n"}
+  ]
+}

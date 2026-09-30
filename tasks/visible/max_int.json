@@ -1,0 +1,4 @@
+{
+  "id": "max_int",
+  "visible": "Read whitespace-separated integers from stdin. Write the maximum value as a decimal integer, followed by a newline.\n\nExample input:\n3 9 2\nExample output:\n9\n"
+}

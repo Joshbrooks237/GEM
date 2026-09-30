@@ -1,0 +1,7 @@
+{
+  "id": "kv_get",
+  "cases": [
+    {"stdin": "nope\ncolor=blue\n", "stdout": "missing\n"},
+    {"stdin": "k\nk=1\nk=2\n", "stdout": "2\n"}
+  ]
+}

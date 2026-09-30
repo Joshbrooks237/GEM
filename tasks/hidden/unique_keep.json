@@ -1,0 +1,7 @@
+{
+  "id": "unique_keep",
+  "cases": [
+    {"stdin": "b b b\n", "stdout": "b\n"},
+    {"stdin": "c a c\n", "stdout": "c a\n"}
+  ]
+}

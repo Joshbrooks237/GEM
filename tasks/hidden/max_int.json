@@ -1,0 +1,7 @@
+{
+  "id": "max_int",
+  "cases": [
+    {"stdin": "-5 -1 -3\n", "stdout": "-1\n"},
+    {"stdin": "4\n", "stdout": "4\n"}
+  ]
+}

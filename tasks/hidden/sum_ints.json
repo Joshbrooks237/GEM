@@ -1,0 +1,8 @@
+{
+  "id": "sum_ints",
+  "cases": [
+    {"stdin": "9 9 9\n", "stdout": "27\n"},
+    {"stdin": "-2 5 1\n", "stdout": "4\n"},
+    {"stdin": "0\n", "stdout": "0\n"}
+  ]
+}

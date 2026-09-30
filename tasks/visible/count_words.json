@@ -1,0 +1,4 @@
+{
+  "id": "count_words",
+  "visible": "Read text from stdin. Write the number of whitespace-separated words, followed by a newline.\n\nExample input:\na bb a\nExample output:\n3\n"
+}

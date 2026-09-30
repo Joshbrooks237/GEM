@@ -1,0 +1,9 @@
+{
+  "id": "kv_keys",
+  "visible": "Read key=value lines from stdin. Write the keys, one per line, in ascending order, with a trailing newline after the last key.\n\nExample input:\nb=2\na=1\nExample output:\na\nb\n",
+  "cases": [
+    {"stdin": "b=2\na=1\n", "stdout": "a\nb\n"},
+    {"stdin": "z=9\n", "stdout": "z\n"},
+    {"stdin": "b=1\na=2\nb=3\n", "stdout": "a\nb\n"}
+  ]
+}

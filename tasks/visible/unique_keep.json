@@ -1,0 +1,4 @@
+{
+  "id": "unique_keep",
+  "visible": "Read whitespace-separated tokens from stdin. Write each distinct token once, in first-seen order, separated by single spaces, followed by a newline.\n\nExample input:\na b a c\nExample output:\na b c\n"
+}

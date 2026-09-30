@@ -1,0 +1,7 @@
+{
+  "id": "count_words",
+  "cases": [
+    {"stdin": "one\n", "stdout": "1\n"},
+    {"stdin": "x  y\n", "stdout": "2\n"}
+  ]
+}

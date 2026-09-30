@@ -1,0 +1,4 @@
+{
+  "id": "is_palindrome",
+  "visible": "Read one line from stdin. Write yes if the line is a palindrome, otherwise no. Follow the answer with a newline.\n\nExample input:\nabba\nExample output:\nyes\n"
+}

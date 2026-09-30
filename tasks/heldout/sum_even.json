@@ -1,0 +1,9 @@
+{
+  "id": "sum_even",
+  "visible": "Sum the even integers only. Read whitespace-separated integers from stdin and write that sum, followed by a newline.\n\nExample input:\n1 2 3 4\nExample output:\n6\n",
+  "cases": [
+    {"stdin": "1 2 3 4\n", "stdout": "6\n"},
+    {"stdin": "-2 5 8\n", "stdout": "6\n"},
+    {"stdin": "1 3\n", "stdout": "0\n"}
+  ]
+}

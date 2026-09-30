@@ -1,0 +1,4 @@
+{
+  "id": "kv_get",
+  "visible": "The first line of stdin is a query key. Each later line has the form key=value. Write the value of the query key, or the word missing if it never appears. A later definition of the same key replaces an earlier one. Follow the answer with a newline.\n\nExample input:\ncolor\ncolor=blue\nsize=1\nExample output:\nblue\n"
+}
