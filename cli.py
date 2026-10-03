@@ -2,6 +2,7 @@
 """Pegmatite command line."""
 
 import argparse
+import os
 import sys
 from pathlib import Path
 
@@ -71,6 +72,9 @@ def main(argv: list[str] | None = None) -> int:
                 overrides["explainability_weight"] = args.explainability_weight
             if args.resource_cap is not None:
                 overrides["resource_cap"] = args.resource_cap
+            model = ""
+            if args.provider == "openai":
+                model = os.environ.get("PEGMATITE_MODEL", "gpt-4o-mini")
             config = ExperimentConfig(
                 seed=args.seed,
                 generations=args.generations,
@@ -80,6 +84,7 @@ def main(argv: list[str] | None = None) -> int:
                 shock_generation=args.shock_generation,
                 heldout_every=args.heldout_every,
                 ecology=args.ecology,
+                model=model,
                 fitness=FitnessConfig(**overrides) if overrides else FitnessConfig(),
             )
             run_id = run_experiment(config, args.run_dir)

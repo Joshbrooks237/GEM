@@ -5,6 +5,7 @@ linear. Agents are not told how survival or reuse is scored.
 """
 
 import json
+import os
 import shutil
 import sys
 import time
@@ -52,6 +53,7 @@ class ExperimentConfig:
     shock_fallback_path: str = "fallback-artifact"
     task_ids: tuple[str, ...] | None = None
     ecology: str = "exp2"
+    model: str = ""
     limits: Limits = field(default_factory=Limits)
     fitness: FitnessConfig = field(default_factory=FitnessConfig)
 
@@ -81,6 +83,8 @@ class ExperimentConfig:
 
 
 def run_experiment(config: ExperimentConfig, runs_root: Path, provider=None) -> str:
+    if config.provider == "openai" and not config.model:
+        config.model = os.environ.get("PEGMATITE_MODEL", "gpt-4o-mini")
     runs_root.mkdir(parents=True, exist_ok=True)
     run_id = _new_run_id(config.seed, runs_root)
     folder = runs_root / run_id
@@ -201,6 +205,24 @@ def _store_settings(ledger: Ledger, run_id: str, config: ExperimentConfig) -> No
     mapping["shock_generation"] = json.dumps(config.shock_generation)
     mapping["shock_fallback_path"] = json.dumps(config.shock_fallback_path)
     mapping["resource_formula"] = json.dumps(formula)
+    mapping["model"] = json.dumps(config.model)
+    flags = {
+        "seed": config.seed,
+        "generations": config.generations,
+        "agents": config.n_agents,
+        "provider": config.provider,
+        "runner": config.runner,
+        "shock-generation": config.shock_generation,
+        "ecology": config.ecology,
+        "heldout-every": config.heldout_every,
+        "base-pass": config.fitness.base_pass,
+        "resource-weight": config.fitness.resource_weight,
+        "reuse-weight": config.fitness.reuse_weight,
+        "explainability-weight": config.fitness.explainability_weight,
+        "resource-cap": config.fitness.resource_cap,
+        "model": config.model,
+    }
+    mapping["cli_flags"] = json.dumps(flags)
     ledger.insert_settings(run_id, mapping)
 
 
@@ -489,6 +511,7 @@ def run_episode(
     repo.set_author(agent_id)
     sandbox = sandbox_factory()
     commands: list[str] = []
+    command_exits: list[int] = []
     tokens = 0
     tool_calls = 0
     started = time.perf_counter()
@@ -545,6 +568,7 @@ def run_episode(
             tool_calls += 1
             result = sandbox.run(command, timeout=min(limits.tool_timeout_s, max(0.2, remaining)))
             commands.append(command)
+            command_exits.append(result.exit_code)
             ledger.insert_tool(
                 episode_id=episode_id,
                 seq=tool_calls,
@@ -577,7 +601,9 @@ def run_episode(
 
     after_tree = snapshot_tree(repo.path)
     touched = touched_paths(before_tree, after_tree)
-    for command in commands:
+    for command, exit_code in zip(commands, command_exits, strict=True):
+        if exit_code != 0:
+            continue
         for role, path, _evidence in classify_command(command):
             if role == "modification" and path:
                 touched.add(path)

@@ -6,10 +6,10 @@ Pegmatite runs coding agents in one shared Git repository under a token budget a
 
 Known issues in those ledgers, with the SQL in [docs/RESULTS.md](docs/RESULTS.md):
 
-- The model id is not stored. Explainability was sampled once, on the exp3 run, score 0.0, and the text is a traceback. The anti-gaming table is empty on every live run.
+- The three live ledgers do not store a model id. A new run writes `PEGMATITE_MODEL` (default `gpt-4o-mini` for `--provider openai`) and the CLI flags into `settings` before the first episode. Explainability was sampled once, on the exp3 run, score 0.0, and the text is a traceback. The anti-gaming table is empty on every live run.
 - Every survivor has `resource_score` 0.50. Each generation has at most one gate pass, so that episode is the median.
 - Many survivors have `commit_sha` NULL. The tools rewrote a file to the same bytes, `git commit` printed `nothing to commit, working tree clean`, and the row is still counted as survived. On `42-20260930T181703` that is 8 of 18 survivors; on `42-20260930T190140`, 12 of 17; on `42-20260930T221506`, episode 127.
-- Episode 107 on `42-20260930T221506` is a scoring bug inside that null-commit count. All four shell commands failed with a syntax error, and a `> ENTRY` in the command text was still treated as a touch, so the existing program was credited (fitness 0.775). The published "4 survivors" includes this row.
+- Episode 107 on `42-20260930T221506` was credited (fitness 0.775) because a failed `> ENTRY` was treated as a touch. The stored "4 survivors" includes that row. A command now counts as a modification only when it exits 0. Those runs predate the fix and were not rewritten. Dropping that row leaves 3 survivors and training mean fitness 0.015.
 - Four other episodes on that run passed every hidden test and scored fitness 0 because `attributable` is 0. That is the exp3 keep-set rule: an inherited `ENTRY` target that the episode did not touch does not score. Mean correctness counts them; mean fitness and `survived` do not.
 - Every stored run uses seed 42. One seed is an anecdote.
 
@@ -45,7 +45,7 @@ python cli.py run --seed 42 --provider openai
 
 `PEGMATITE_BASE_URL` overrides `https://api.openai.com/v1`. `--runner local` executes model commands on the host. Do not use it for an untrusted model.
 
-Knobs: `--generations`, `--agents`, `--shock-generation` (default 25; `0` turns the shock off), `--heldout-every`, `--run-dir`. Fitness weights are per-run flags (`--base-pass`, `--resource-weight`, `--reuse-weight`, `--explainability-weight`, `--resource-cap`). The values used for a run are written down at the start and do not change afterward.
+Knobs: `--generations`, `--agents`, `--shock-generation` (default 25; `0` turns the shock off), `--heldout-every`, `--run-dir`. Fitness weights are per-run flags (`--base-pass`, `--resource-weight`, `--reuse-weight`, `--explainability-weight`, `--resource-cap`). Those flags and the model id are written into `settings` and `config_json` when the run starts, and they do not change afterward.
 
 ## What is held fixed
 
