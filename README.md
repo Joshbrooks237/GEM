@@ -1,5 +1,18 @@
 # Pegmatite
 
+## Status
+
+Pegmatite runs coding agents in one shared Git repository under a token budget and a time budget, and writes each episode to a ledger. Three live runs on seed 42 are stored as complete at generation 50 of 50; the two scripted runs are harness checks and are not evidence. The charts and the write-up are in [docs/index.html](docs/index.html) and [docs/RESULTS.md](docs/RESULTS.md).
+
+Known issues in those ledgers, with the SQL in [docs/RESULTS.md](docs/RESULTS.md):
+
+- The model id is not stored. Explainability was sampled once, on the exp3 run, score 0.0, and the text is a traceback. The anti-gaming table is empty on every live run.
+- Every survivor has `resource_score` 0.50. Each generation has at most one gate pass, so that episode is the median.
+- Many survivors have `commit_sha` NULL. The tools rewrote a file to the same bytes, `git commit` printed `nothing to commit, working tree clean`, and the row is still counted as survived. On `42-20260930T181703` that is 8 of 18 survivors; on `42-20260930T190140`, 12 of 17; on `42-20260930T221506`, episode 127.
+- Episode 107 on `42-20260930T221506` is a scoring bug inside that null-commit count. All four shell commands failed with a syntax error, and a `> ENTRY` in the command text was still treated as a touch, so the existing program was credited (fitness 0.775). The published "4 survivors" includes this row.
+- Four other episodes on that run passed every hidden test and scored fitness 0 because `attributable` is 0. That is the exp3 keep-set rule: an inherited `ENTRY` target that the episode did not touch does not score. Mean correctness counts them; mean fitness and `survived` do not.
+- Every stored run uses seed 42. One seed is an anecdote.
+
 Pegmatite is a reproducible scarcity experiment. Coding agents share one Git repository and solve small programs under a hard token budget and a hard time budget. The question is not how to design a language. The question is which habits survive.
 
 > Given the same initial conditions, task distribution, resource constraints, model, and shocks, what software conventions spontaneously persist?

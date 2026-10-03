@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pegmatite live runs, generations 1–50</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f4f1ea;
+    --paper: #fffdf8;
+    --ink: #1c1915;
+    --muted: #5c564c;
+    --line: #e4ddd0;
+    --accent: #9a3412;
+    --grid: #e7e0d4;
+    --fit: #9a3412;
+    --corr: #1d4e89;
+    --res: #0f766e;
+    --reuse: #a16207;
+    --nov: #6d28d9;
+    --held: #94a3b8;
+    --shock: #9a3412;
+  }
+  html[data-theme="dark"] {
+    --bg: #141210;
+    --paper: #1c1916;
+    --ink: #f3efe6;
+    --muted: #b7b0a4;
+    --line: #2e2a25;
+    --accent: #f0a07a;
+    --grid: #2a2622;
+    --fit: #f0a07a;
+    --corr: #93c5fd;
+    --res: #5eead4;
+    --reuse: #fcd34d;
+    --nov: #d8b4fe;
+    --held: #64748b;
+    --shock: #f0a07a;
+  }
+  @media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]) {
+      --bg: #141210;
+      --paper: #1c1916;
+      --ink: #f3efe6;
+      --muted: #b7b0a4;
+      --line: #2e2a25;
+      --accent: #f0a07a;
+      --grid: #2a2622;
+      --fit: #f0a07a;
+      --corr: #93c5fd;
+      --res: #5eead4;
+      --reuse: #fcd34d;
+      --nov: #d8b4fe;
+      --held: #64748b;
+      --shock: #f0a07a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.5 "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+  }
+  main { max-width: 920px; margin: 0 auto; padding: 28px 18px 64px; }
+  header { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+  h1 { font-size: 1.7rem; line-height: 1.2; margin: 0 0 8px; font-weight: 600; }
+  h2 { font-size: 1.15rem; margin: 28px 0 8px; font-weight: 600; }
+  p { margin: 0 0 12px; }
+  a { color: var(--accent); }
+  .lede { color: var(--ink); max-width: 68ch; }
+  .muted { color: var(--muted); }
+  button, select {
+    font: inherit;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 10px;
+  }
+  button { cursor: pointer; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 16px 0; }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 14px 10px;
+    margin: 12px 0 18px;
+  }
+  .chart-wrap { position: relative; width: 100%; height: 260px; }
+  canvas { width: 100%; height: 100%; display: block; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 16px; font-size: 0.92rem; margin-top: 8px; }
+  .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  .note { font-size: 0.92rem; color: var(--muted); }
+  #tip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 6px 8px;
+    font-size: 0.85rem;
+    display: none;
+    max-width: 220px;
+  }
+  @media (max-width: 640px) {
+    h1 { font-size: 1.4rem; }
+    main { padding: 18px 12px 48px; }
+    .chart-wrap { height: 220px; }
+    header { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1>Pegmatite live runs</h1>
+      <p class="lede">Three live runs, seed 42, each recorded as generations 1–50 of a planned 50. The model name is not in the ledger. One seed is an anecdote, not a pattern. Scripted runs are omitted; they are harness checks.</p>
+    </div>
+    <button id="theme" type="button">Theme</button>
+  </header>
+  <p class="muted">Numbers are training-episode means from <code>ledger.sqlite</code>. The write-up, with the SQL, is <a href="RESULTS.md">RESULTS.md</a>.</p>
+  <div class="toolbar">
+    <label for="run">Run</label>
+    <select id="run"></select>
+  </div>
+  <p id="blurb"></p>
+
+  <h2>Fitness by generation</h2>
+  <div class="card">
+    <div class="chart-wrap"><canvas id="fit"></canvas><div id="tip"></div></div>
+    <div class="legend"><span><i class="swatch" style="background:var(--fit)"></i>mean fitness</span></div>
+    <p class="note">Each point is the mean of three training episodes. A failed hidden-test gate scores 0, so the line sits on zero in generations with no pass. The vertical mark is generation 25, where a shock was configured. It is an applied rename only on run 181703.</p>
+  </div>
+
+  <h2>Component scores by generation</h2>
+  <div class="card">
+    <div class="chart-wrap"><canvas id="comp"></canvas></div>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--corr)"></i>correctness</span>
+      <span><i class="swatch" style="background:var(--res)"></i>resource</span>
+      <span><i class="swatch" style="background:var(--reuse)"></i>reuse</span>
+      <span><i class="swatch" style="background:var(--nov)"></i>novelty</span>
+    </div>
+    <p class="note">Explainability is not plotted. The stored score is null on almost every episode. One sampled row, on run 221506 episode 51, scored 0. Novelty stays high on failed episodes; it is recorded and not part of fitness.</p>
+  </div>
+
+  <h2>Tokens by generation</h2>
+  <div class="card">
+    <div class="chart-wrap"><canvas id="tok"></canvas></div>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--fit)"></i>training tokens</span>
+      <span><i class="swatch" style="background:var(--held)"></i>held-out tokens</span>
+    </div>
+    <p class="note">Held-out probes land on generations 10, 20, 30, 40, and 50. No dollar figure is in the ledger.</p>
+  </div>
+
+  <h2>Cut at generation 25</h2>
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th></th><th>Gate passes</th><th>Mean fitness</th><th>Mean reuse score</th><th>Reuse events</th></tr>
+      </thead>
+      <tbody id="cut"></tbody>
+    </table>
+    <p class="note" id="cutnote"></p>
+  </div>
+</main>
+<script>
+const RUNS = [{"label":"181703 \u00b7 shock applied","shock":"applied","blurb":"Provider openai, runner docker, shock_generation 25. The rename was applied: echo_reverse.py to echo_reverse.r25.py, commit 408f770c3076. 293,513 tokens. 18 of 150 training episodes survived, all task echo_reverse. 8 of those 18 have no commit.","note":"This is the only live run with an applied rename. Reuse events are 26 before generation 25 and 30 after, all of them invocations of echo_reverse.py. Mean reuse score falls after the cut because credit sits on the producer episode.","rows":[["Generations 1\u201324","11/72","0.131","0.086","26"],["Generations 25\u201350","7/78","0.071","0.013","30"],["All training","18/150","0.100","0.048","56"]],"fit":[0.302,0.0,0.258,0.0,0.302,0.0,0.0,0.258,0.0,0.304,0.0,0.29,0.0,0.0,0.29,0.0,0.29,0.0,0.302,0.0,0.0,0.297,0.0,0.258,0.0,0.308,0.0,0.0,0.0,0.0,0.258,0.0,0.258,0.0,0.0,0.258,0.0,0.0,0.0,0.0,0.0,0.0,0.258,0.0,0.258,0.0,0.258,0.0,0.0,0.0],"corr":[0.333,0.0,0.333,0.0,0.333,0.0,0.0,0.333,0.0,0.333,0.0,0.333,0.0,0.0,0.333,0.0,0.333,0.0,0.333,0.0,0.0,0.333,0.0,0.333,0.0,0.333,0.0,0.0,0.0,0.0,0.333,0.0,0.333,0.0,0.0,0.333,0.0,0.0,0.0,0.0,0.0,0.0,0.333,0.0,0.333,0.0,0.333,0.0,0.0,0.0],"res":[0.734,0.0,0.47,0.0,0.478,0.0,0.0,0.663,0.0,0.571,0.0,0.445,0.0,0.0,0.662,0.0,0.707,0.0,0.412,0.0,0.0,0.593,0.0,0.701,0.0,0.52,0.0,0.0,0.0,0.0,0.57,0.0,0.519,0.0,0.0,0.833,0.0,0.0,0.0,0.0,0.0,0.0,0.662,0.0,0.701,0.0,0.479,0.0,0.0,0.0],"reuse":[0.288,0.0,0.0,0.0,0.288,0.0,0.0,0.0,0.0,0.306,0.0,0.211,0.0,0.0,0.211,0.0,0.211,0.0,0.288,0.0,0.0,0.259,0.0,0.0,0.0,0.333,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"nov":[0.593,0.626,0.632,0.893,0.902,0.526,0.87,0.238,0.887,0.278,0.876,0.559,0.576,0.87,0.238,0.889,0.259,0.848,0.756,0.857,0.869,0.289,0.885,0.259,0.513,0.559,0.5,0.837,0.238,0.837,0.296,0.847,0.559,0.567,0.559,0.571,0.889,0.804,0.811,0.797,0.516,0.9,0.238,0.578,0.259,0.866,0.596,0.516,0.887,0.509],"tok":[4275,4527,6054,5726,5362,4532,6385,4250,5354,6793,6789,5864,6338,5338,4270,5852,3970,5730,6880,5430,4444,5764,5321,3907,6798,4891,6042,5057,4162,5527,6551,6563,4872,6043,3689,6700,5854,6915,7258,4881,4515,5821,4255,4521,3919,7284,5309,5829,5638,4269],"held":[0,0,0,0,0,0,0,0,0,4103,0,0,0,0,0,0,0,0,0,3978,0,0,0,0,0,0,0,0,0,4338,0,0,0,0,0,0,0,0,0,4354,0,0,0,0,0,0,0,0,0,4422]},{"label":"190140 \u00b7 shock not applied","shock":"absent","blurb":"Same flags as 181703, including shock_generation 25. The shock row has applied 0 and reason fallback_absent. No rename commit. 309,886 tokens. 17 of 150 training episodes survived, all task echo_reverse. 12 of those 17 have no commit. Reuse events: 0.","note":"The generation-25 line is the configured slot. No file was renamed. Mean fitness on both sides is the pass rate times 0.775.","rows":[["Generations 1\u201324","9/72","0.097","0.000","0"],["Generations 25\u201350","8/78","0.079","0.000","0"],["All training","17/150","0.088","0.000","0"]],"fit":[0.258,0.0,0.258,0.0,0.0,0.0,0.0,0.258,0.0,0.258,0.0,0.258,0.0,0.0,0.258,0.0,0.258,0.0,0.258,0.0,0.0,0.0,0.0,0.258,0.0,0.258,0.0,0.0,0.258,0.0,0.258,0.0,0.258,0.0,0.0,0.258,0.0,0.258,0.0,0.0,0.0,0.0,0.258,0.0,0.258,0.0,0.0,0.0,0.0,0.0],"corr":[0.333,0.0,0.333,0.0,0.0,0.0,0.0,0.333,0.0,0.333,0.0,0.333,0.0,0.0,0.333,0.0,0.333,0.0,0.333,0.0,0.0,0.0,0.0,0.333,0.0,0.333,0.0,0.0,0.333,0.0,0.333,0.0,0.333,0.0,0.0,0.333,0.0,0.333,0.0,0.0,0.0,0.0,0.333,0.0,0.333,0.0,0.0,0.0,0.0,0.0],"res":[0.663,0.0,0.702,0.0,0.0,0.0,0.0,0.66,0.0,0.703,0.0,0.519,0.0,0.0,0.566,0.0,0.569,0.0,0.486,0.0,0.0,0.0,0.0,0.563,0.0,0.519,0.0,0.0,0.662,0.0,0.4,0.0,0.533,0.0,0.0,0.661,0.0,0.481,0.0,0.0,0.0,0.0,0.666,0.0,0.427,0.0,0.0,0.0,0.0,0.0],"reuse":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"nov":[0.593,0.946,0.286,0.831,0.886,0.893,0.896,0.259,0.932,0.286,0.938,0.599,0.544,0.879,0.801,0.89,0.296,0.841,0.563,0.537,0.563,0.526,0.882,0.537,0.85,0.558,0.524,0.869,0.238,0.89,0.531,0.841,0.526,0.567,0.834,0.238,0.89,0.537,0.848,0.826,0.551,0.906,0.238,0.578,0.537,0.886,0.863,0.567,0.901,0.526],"tok":[4288,5356,3924,5408,6279,4937,7996,4274,7203,3896,6769,4866,6069,5499,4693,5846,7225,8231,5103,4509,6480,4285,6873,5618,5751,4874,4582,4842,4232,7063,6840,5113,4669,8389,4626,4238,7226,5994,5724,5799,7615,5283,4310,4530,6494,7356,7527,6049,7780,5201],"held":[0,0,0,0,0,0,0,0,0,4756,0,0,0,0,0,0,0,0,0,4354,0,0,0,0,0,0,0,0,0,4334,0,0,0,0,0,0,0,0,0,4354,0,0,0,0,0,0,0,0,0,4354]},{"label":"221506 \u00b7 shock off","shock":"off","blurb":"Ecology exp3, shock_generation 0, no shock row. 497,207 tokens. 4 of 150 training episodes survived, all task raw_dev_count. 2 of those 4 have no commit. The line at generation 25 is only a reference mark.","note":"This cut is not a before/after shock. Four other episodes passed every hidden test and still scored fitness 0 because attributable was 0. Of the 4 survivors, episode 127 has no commit because the bytes did not change, and episode 107 has no commit because its shell commands failed before the redirect.","rows":[["Generations 1\u201324","2/72 gate, 1 survived","0.010","0.005","1"],["Generations 25\u201350","6/78 gate, 3 survived","0.030","0.000","0"],["All training","8/150 gate, 4 survived","0.020","0.003","1"]],"fit":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.245,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.258,0.0,0.0,0.0,0.0,0.0,0.0,0.258,0.0,0.0,0.0,0.0,0.0,0.0,0.258,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"corr":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.333,0.0,0.0,0.0,0.333,0.0,0.0,0.0,0.0,0.0,0.333,0.0,0.0,0.0,0.0,0.0,0.0,0.333,0.0,0.0,0.333,0.0,0.0,0.0,0.333,0.0,0.0,0.0,0.0,0.0,0.333,0.0,0.0,0.0,0.333],"res":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.485,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.614,0.0,0.0,0.0,0.0,0.0,0.0,0.586,0.0,0.0,0.0,0.0,0.0,0.0,0.451,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"reuse":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.131,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"nov":[0.667,0.0,0.667,1.0,0.667,0.667,1.0,0.667,0.333,0.667,0.667,0.333,0.667,1.0,0.667,0.667,0.961,0.497,0.273,0.582,0.874,0.0,0.689,0.613,0.276,0.307,0.917,0.482,0.272,0.839,0.608,0.862,0.566,0.333,0.571,0.273,0.91,0.482,0.276,0.627,0.783,0.0,0.606,0.333,0.276,0.606,0.917,0.576,0.273,0.627],"tok":[6975,4601,8057,14357,6005,9584,7711,6736,9688,13428,9166,6874,10449,10941,10165,9696,7618,8352,9587,10207,8291,7940,9806,7066,5218,8073,6606,7124,9068,12072,8973,12874,11441,7982,7434,8587,13441,7142,10414,10439,8787,4440,11046,8432,5029,7526,10084,8520,9186,8529],"held":[0,0,0,0,0,0,0,0,0,12019,0,0,0,0,0,0,0,0,0,10419,0,0,0,0,0,0,0,0,0,11392,0,0,0,0,0,0,0,0,0,11859,0,0,0,0,0,0,0,0,0,9751]}];
+
+const select = document.getElementById("run");
+const blurb = document.getElementById("blurb");
+const cutBody = document.getElementById("cut");
+const cutNote = document.getElementById("cutnote");
+let current = 0;
+
+RUNS.forEach((run, i) => {
+  const opt = document.createElement("option");
+  opt.value = String(i);
+  opt.textContent = run.label;
+  select.appendChild(opt);
+});
+
+function colors() {
+  const s = getComputedStyle(document.documentElement);
+  const pick = (name) => s.getPropertyValue(name).trim();
+  return {
+    ink: pick("--ink"), muted: pick("--muted"), grid: pick("--grid"),
+    fit: pick("--fit"), corr: pick("--corr"), res: pick("--res"),
+    reuse: pick("--reuse"), nov: pick("--nov"), held: pick("--held"),
+    shock: pick("--shock"), paper: pick("--paper")
+  };
+}
+
+function setup(canvas) {
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+  canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { ctx, w: rect.width, h: rect.height };
+}
+
+function frame(ctx, w, h, c) {
+  const pad = { l: 44, r: 12, t: 16, b: 28 };
+  ctx.clearRect(0, 0, w, h);
+  ctx.strokeStyle = c.grid;
+  ctx.fillStyle = c.muted;
+  ctx.font = "12px Georgia, serif";
+  ctx.lineWidth = 1;
+  return pad;
+}
+
+function shockLine(ctx, pad, w, h, c, run) {
+  const x = pad.l + (24.5 / 49) * (w - pad.l - pad.r);
+  ctx.save();
+  ctx.strokeStyle = c.shock;
+  ctx.globalAlpha = run.shock === "applied" ? 0.9 : 0.35;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(x, pad.t);
+  ctx.lineTo(x, h - pad.b);
+  ctx.stroke();
+  ctx.restore();
+  return x;
+}
+
+function yTicks(ctx, pad, w, h, c, max, digits) {
+  ctx.textAlign = "right";
+  for (let i = 0; i <= 4; i++) {
+    const v = (max * i) / 4;
+    const y = (h - pad.b) - (i / 4) * (h - pad.t - pad.b);
+    ctx.strokeStyle = c.grid;
+    ctx.beginPath();
+    ctx.moveTo(pad.l, y);
+    ctx.lineTo(w - pad.r, y);
+    ctx.stroke();
+    ctx.fillStyle = c.muted;
+    ctx.fillText(v.toFixed(digits), pad.l - 6, y + 4);
+  }
+  ctx.textAlign = "center";
+  ctx.fillText("1", pad.l, h - 8);
+  ctx.fillText("25", pad.l + (24 / 49) * (w - pad.l - pad.r), h - 8);
+  ctx.fillText("50", w - pad.r, h - 8);
+}
+
+function line(ctx, pad, w, h, values, max, color) {
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  values.forEach((v, i) => {
+    const x = pad.l + (i / 49) * (w - pad.l - pad.r);
+    const y = (h - pad.b) - (v / max) * (h - pad.t - pad.b);
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+}
+
+function drawFit() {
+  const run = RUNS[current];
+  const canvas = document.getElementById("fit");
+  const { ctx, w, h } = setup(canvas);
+  const c = colors();
+  const pad = frame(ctx, w, h, c);
+  yTicks(ctx, pad, w, h, c, 0.4, 2);
+  shockLine(ctx, pad, w, h, c, run);
+  line(ctx, pad, w, h, run.fit, 0.4, c.fit);
+}
+
+function drawComp() {
+  const run = RUNS[current];
+  const canvas = document.getElementById("comp");
+  const { ctx, w, h } = setup(canvas);
+  const c = colors();
+  const pad = frame(ctx, w, h, c);
+  yTicks(ctx, pad, w, h, c, 1, 1);
+  shockLine(ctx, pad, w, h, c, run);
+  line(ctx, pad, w, h, run.corr, 1, c.corr);
+  line(ctx, pad, w, h, run.res, 1, c.res);
+  line(ctx, pad, w, h, run.reuse, 1, c.reuse);
+  line(ctx, pad, w, h, run.nov, 1, c.nov);
+}
+
+function drawTok() {
+  const run = RUNS[current];
+  const canvas = document.getElementById("tok");
+  const { ctx, w, h } = setup(canvas);
+  const c = colors();
+  const pad = frame(ctx, w, h, c);
+  const totals = run.tok.map((t, i) => t + run.held[i]);
+  const max = Math.max(...totals) * 1.05;
+  ctx.textAlign = "right";
+  ctx.fillStyle = c.muted;
+  ctx.font = "12px Georgia, serif";
+  for (let i = 0; i <= 4; i++) {
+    const v = (max * i) / 4;
+    const y = (h - pad.b) - (i / 4) * (h - pad.t - pad.b);
+    ctx.strokeStyle = c.grid;
+    ctx.beginPath();
+    ctx.moveTo(pad.l, y);
+    ctx.lineTo(w - pad.r, y);
+    ctx.stroke();
+    ctx.fillText(Math.round(v).toLocaleString("en-US"), pad.l - 6, y + 4);
+  }
+  ctx.textAlign = "center";
+  ctx.fillText("1", pad.l, h - 8);
+  ctx.fillText("25", pad.l + (24 / 49) * (w - pad.l - pad.r), h - 8);
+  ctx.fillText("50", w - pad.r, h - 8);
+  const inner = w - pad.l - pad.r;
+  const bar = inner / 50 * 0.7;
+  run.tok.forEach((t, i) => {
+    const x = pad.l + ((i + 0.5) / 50) * inner - bar / 2;
+    const y0 = h - pad.b;
+    const h1 = (t / max) * (h - pad.t - pad.b);
+    const h2 = (run.held[i] / max) * (h - pad.t - pad.b);
+    ctx.fillStyle = c.fit;
+    ctx.fillRect(x, y0 - h1, bar, h1);
+    ctx.fillStyle = c.held;
+    ctx.fillRect(x, y0 - h1 - h2, bar, h2);
+  });
+  shockLine(ctx, pad, w, h, c, run);
+}
+
+function render() {
+  const run = RUNS[current];
+  blurb.textContent = run.blurb;
+  cutBody.innerHTML = run.rows.map(r =>
+    `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`
+  ).join("");
+  cutNote.textContent = run.note;
+  drawFit();
+  drawComp();
+  drawTok();
+}
+
+select.addEventListener("change", () => { current = Number(select.value); render(); });
+document.getElementById("theme").addEventListener("click", () => {
+  const root = document.documentElement;
+  const now = root.getAttribute("data-theme");
+  const dark = now ? now === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.setAttribute("data-theme", dark ? "light" : "dark");
+  render();
+});
+window.addEventListener("resize", render);
+render();
+</script>
+</body>
+</html>
